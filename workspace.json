@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "apps-tech-radar": "packages/apps/tech-radar",
+    "apps-tech-radar-next": "packages/apps/tech-radar-next",
+    "e2e": "packages/e2e",
+    "libs-db-access": "packages/libs/db-access",
+    "libs-utilities": "packages/libs/utilities",
+    "libs-web-scraper": "packages/libs/web-scraper",
+    "types": "packages/types"
+  }
+}

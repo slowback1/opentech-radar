@@ -1,0 +1,46 @@
+version: "3.2"
+services:
+  tech_radar:
+    build:
+      context: .
+      dockerfile: ./packages/apps/tech-radar/Dockerfile
+    links:
+      - "db:db"
+    environment:
+      NX_POSTGRES_USER: $POSTGRES_USER
+      NX_POSTGRES_PASSWORD: $POSTGRES_PW
+      NX_POSTGRES_DB: $POSTGRES_DB
+      NX_POSTGRES_HOST: db
+      NX_POSTGRES_PORT: 5432
+      NX_SG_APIKEY: $NX_SG_APIKEY
+      NX_SG_EMAILFROM: $NX_SG_EMAILFROM
+      NX_SG_EMAILTO: $NX_SG_EMAILTO
+  tech_radar_ui:
+    build:
+      context: .
+      dockerfile: ./packages/apps/tech-radar-next/Dockerfile
+    links:
+      - "db:db"
+    environment:
+      NX_POSTGRES_USER: $POSTGRES_USER
+      NX_POSTGRES_PASSWORD: $POSTGRES_PW
+      NX_POSTGRES_DB: $POSTGRES_DB
+      NX_POSTGRES_HOST: db
+      NX_POSTGRES_PORT: 5432
+      NX_SG_APIKEY: $NX_SG_APIKEY
+      NX_SG_EMAILFROM: $NX_SG_EMAILFROM
+      NX_SG_EMAILTO: $NX_SG_EMAILTO
+    ports:
+      - "4200:4200"
+  db:
+    image: 'postgres:latest'
+    ports:
+      - '3224:5432'
+    volumes:
+      - tech_radar_db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PW
+      POSTGRES_DB: $POSTGRES_DB
+volumes:
+  tech_radar_db:

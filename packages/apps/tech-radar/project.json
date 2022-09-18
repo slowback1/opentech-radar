@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/apps/tech-radar/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/apps/tech-radar",
+        "main": "packages/apps/tech-radar/src/main.ts",
+        "tsConfig": "packages/apps/tech-radar/tsconfig.app.json",
+        "assets": [
+          "packages/apps/tech-radar/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/apps/tech-radar/src/environments/environment.ts",
+              "with": "packages/apps/tech-radar/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "apps-tech-radar:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "apps-tech-radar:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/apps/tech-radar/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/packages/apps/tech-radar"
+      ],
+      "options": {
+        "jestConfig": "packages/apps/tech-radar/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "docker": {
+      "executor": "@nx-tools/nx-docker:build"
+    }
+  },
+  "tags": []
+}

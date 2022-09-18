@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@opentech-radar/utilities": [
+        "packages/libs/utilities/src/index.ts"
+      ],
+      "@opentech-radar/db-access": [
+        "packages/libs/db-access/src/index.ts"
+      ],
+      "@opentech-radar/types": ["packages/types/src/index.ts"],
+      "@opentech-radar/web-scraper": ["packages/libs/web-scraper/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
